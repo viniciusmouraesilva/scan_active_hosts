@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Extrai usuários do arquivo passwd flag.sh
+# Extrai usuários do arquivo passwd + Script com opção para encontrar hosts ativos através do ping em uma rede /24 hosts.sh
 #
 # Autor: Vinicius Moura
 # Manutenção: Vinicius Moura
@@ -9,15 +9,14 @@
 #
 #
 #  Exemplos:
-#   $ ./flag.sh -s -m
+#   $ ./hosts.sh -s -m
 #   Neste exemplo ficara em maiusculo e ordem alfabetica
 #
-#   $ ./flag.sh -c
+#   $ ./hosts.sh -c
 #   Neste exemplo você obterá os hosts ativos na rede através de ping
 #   O arquivo targets.txt será gerado com os HOSTS ativos via ping
 #
 #
-#statements
 # ------------------------------------------------------------------------ #
 # Histórico:
 #
