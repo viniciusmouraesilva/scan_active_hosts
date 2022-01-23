@@ -14,7 +14,7 @@
 #
 #   $ ./hosts.sh -c
 #   Neste exemplo você obterá os hosts ativos na rede através de ping
-#   O arquivo targets.txt será gerado com os HOSTS ativos via ping
+#   O arquivo targets será gerado com os HOSTS ativos via ping
 #
 #
 # ------------------------------------------------------------------------ #
@@ -68,12 +68,14 @@ done
 
 
 if [ $HOSTS_ATIVOS -eq 1 ]; then #Opção -c Ativada?
+	touch -f pingnetwork
+	touch -f targets
 	for octet in $(seq $INICIO $FIM ); do #De 1 até 254
-    #Pacote ping com quebra do último octeto concatenando o iterador do Loop para varrer a rede
-    ping -c1 "${IP_HOST%.*}.$octet" -W 1 > pingnetwork.txt;
+    		#Pacote ping com quebra do último octeto concatenando o iterador do Loop para varrer a rede
+    		ping -c1 "${IP_HOST%.*}.$octet" -W 1 >> pingnetwork;
 	done;
-	cat pingnetwork | grep "bytes from" | cut -d " " -f4 | cut -d ":" -f1 > targets.txt
-	cat targets.txt #mostra hosts ativos.
+	cat pingnetwork | grep "bytes from" | cut -d " " -f4 | cut -d ":" -f1 >> targets
+	cat targets #mostra hosts ativos.
 fi
 
 echo "$USUARIOS"
