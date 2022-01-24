@@ -35,16 +35,16 @@ HOSTS_ATIVOS=0 #Você precisa saber os hosts ativos?
 INICIO=1 #Primeiro host.
 FIM=254 #Ultimo host.
 VERDE="\033[32m"
-# ------------------------------- EXECUÇÃO --------------------------
+# ------------------------------- EXECUÇÃO ------------------------------- #
 
 #Case linux
 
 while test -n "$1"
 do
 	case "$1" in
-		-h) echo "$MENSAGEM_USO" && exit 0 			          				;;
-		-v) echo "$VERSAO" && exit 0	   				  					;;
-		-c) HOSTS_ATIVOS=1 		   				  							;;
+		-h) echo "$MENSAGEM_USO" && exit 0 			          	;;
+		-v) echo "$VERSAO" && exit 0	   				  	;;
+		-c) HOSTS_ATIVOS=1 		   				  	;;
 	 	*) echo " -- Opção inválida. Utilize -h para ajuda --" && exit 1  	;;
 	esac
 	shift
