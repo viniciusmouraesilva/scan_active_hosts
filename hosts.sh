@@ -7,42 +7,30 @@
 #
 # ------------------------------------------------------------------------ #
 #
-#
-#  Exemplos:
-#   $ ./hosts.sh -s -m
-#   Neste exemplo ficara em maiusculo e ordem alfabetica
-#
 #   $ ./hosts.sh -c
 #   Neste exemplo você obterá os hosts ativos na rede através de ping
 #   O arquivo targets.txt será gerado com os HOSTS ativos via ping
 #
-#
 # ------------------------------------------------------------------------ #
 # Histórico:
 #
-#   v1.4 14/01/2022, Vinicius:
+#   v1.5 23/01/2022, Vinicius:
 #
 # ------------------------------------------------------------------------ #
 # Testado em:
 #   Debian 11.2.0
 #   Centos 7.9.2009
-# ------------------------------------------------------------------------ #
-# Agradecimentos:
-# ------------------------------------------------------------------------ #
-
-# ------------------------------- VARIÁVEIS --------------------------
+#
+# ------------------------------- VARIÁVEIS ------------------------------ #
 USUARIOS="$(cat /etc/passwd | cut -d : -f 1)"
 IP_HOST="$(hostname -I | cut -d " " -f1)" #Qual é o IP do host?
 MENSAGEM_USO="
   $0 - [OPÇÕES]
   -h - Menu de ajuda
   -v - Versão
-  -s - Ordenar a saída
   -c - Hosts Ativos em uma rede /24
 "
-VERSAO="v1.4"
-CHAVE_ORDENA=0
-CHAVE_MAIUSCULA=0
+VERSAO="v1.5"
 HOSTS_ATIVOS=0 #Você precisa saber os hosts ativos?
 INICIO=1 #Primeiro host.
 FIM=254 #Ultimo host.
@@ -54,19 +42,13 @@ VERDE="\033[32m"
 while test -n "$1"
 do
 	case "$1" in
-		-h) echo "$MENSAGEM_USO" && exit 0 			          ;;
-		-v) echo "$VERSAO" && exit 0	   				  ;;
-		-s) CHAVE_ORDENA=1	 	   				  ;;
-		-m) CHAVE_MAIUSCULA=1						  ;;
-		-c) HOSTS_ATIVOS=1 		   				  ;;
-	 	*) echo " -- Opção inválida. Utilize -h para ajuda --" && exit 1  ;;
+		-h) echo "$MENSAGEM_USO" && exit 0 			          				;;
+		-v) echo "$VERSAO" && exit 0	   				  					;;
+		-c) HOSTS_ATIVOS=1 		   				  							;;
+	 	*) echo " -- Opção inválida. Utilize -h para ajuda --" && exit 1  	;;
 	esac
 	shift
 done
-
-[ $CHAVE_ORDENA -eq 1 ] && USUARIOS=$(echo "$USUARIOS" | sort)  		#echo "$USUARIOS" | sort
-[ $CHAVE_MAIUSCULA -eq 1 ] && USUARIOS=$(echo "$USUARIOS" | tr [a-z] [A-Z])	#echo "$USUARIOS" | tr [a-z] [A-Z]
-
 
 if [ $HOSTS_ATIVOS -eq 1 ]; then #Opção -c Ativada?
 	echo>pingnetwork
@@ -80,5 +62,3 @@ if [ $HOSTS_ATIVOS -eq 1 ]; then #Opção -c Ativada?
 	echo -e "${VERDE} $TARGETS" #mostra hosts ativos
   	exit 0
 fi
-
-echo -e "${VERMELHO} $USUARIOS"
