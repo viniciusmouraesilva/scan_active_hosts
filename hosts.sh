@@ -60,5 +60,4 @@ if [ $HOSTS_ATIVOS -eq 1 ]; then #Opção -c Ativada?
 	cat pingnetwork | grep "bytes from" | cut -d " " -f4 | cut -d ":" -f1 >> targets
 	TARGETS="$(cat targets)" 
 	echo -e "${VERDE} $TARGETS" #mostra hosts ativos
-  	exit 0
 fi
